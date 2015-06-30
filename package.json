@@ -1,6 +1,6 @@
 {
   "name": "Sample_Sequelize",
-  "description": "Connecting to DB throw ORM",
+  "description": "Connecting to DB using ORM",
   "author": "Victor Gusev <viktor@nmmlm.com>",
   "dependencies": {
     "colors": "^1.1.2",
