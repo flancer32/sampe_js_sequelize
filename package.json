@@ -1,0 +1,15 @@
+{
+  "name": "Sample_Sequelize",
+  "description": "Connecting to DB throw ORM",
+  "author": "Victor Gusev <viktor@nmmlm.com>",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "mysql": ">= 2.7.0",
+    "sequelize": ">= 3.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flancer32/sampe_js_sequelize.git"
+  },
+  "license": "MIT"
+}
