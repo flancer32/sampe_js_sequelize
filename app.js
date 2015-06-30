@@ -6,11 +6,12 @@
  get 2nd row
  Update 2nd row
  Delete 3rd row
-*/
+ */
 
 /* Define dependencies */
 var Sequelize = require('sequelize')
-var colors = require('colors')
+var Colors = require('colors')
+var Promise = require('promise');
 
 /* Creating conection instance (one per app) */
 var sequelize = new Sequelize('sample_sequelize', 'sample', '3Jcftix7VycNkEYKxIDW', {
@@ -33,17 +34,26 @@ var Company = sequelize.define('company', {
 Employee.belongsTo(Person)
 Employee.belongsTo(Company)
 
-Employee.drop()
-Person.drop()
-Company.drop()
+sequelize.drop().then(function() {
+    sequelize.sync()
+    .then(function () {
+        return Promise.all([
+            Company.create({name: 'HTC'}),
+            Company.create({name: 'F. Lancer'}),
+            Company.create({name: 'Nokia'})])
+    })
+    .then(function () {
+        return Promise.all([
+            Company.findById(2),
+            Company.findById(3)
+        ])
+    })
+    .then(function (obj1, obj2) {
+        return Promise.all([
+            obj1.updateAttributes({name: 'F. Lancer 2'}),
+            obj2.destroy()
+            ])
+    })
 
-// Create tables on sequelize.sync()
-sequelize.sync()
-    .then(function() {return Company.create({name: 'HTC'})})
-    .then(function() {return Company.create({name: 'F. Lancer'})})
-    .then(function() {return Company.create({name: 'Nokia'})})
-    .then(function() {return Company.findById(2)})
-    .then(function (obj) {return obj.updateAttributes({name: 'F. Lancer 2'}) })
-    .then(function() {return Company.findById(3)})
-    .then(function(obj) {return obj.destroy()})
+})
 
