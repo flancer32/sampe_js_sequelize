@@ -48,10 +48,12 @@ sequelize.drop().then(function() {
             Company.findById(3)
         ])
     })
-    .then(function (obj1, obj2) {
-        return Promise.all([
-            obj1.updateAttributes({name: 'F. Lancer 2'}),
-            obj2.destroy()
+    .then(function (objs) {
+            var obj1 = objs[0]
+            var obj2 = objs[1]
+            return Promise.all([
+                obj1.updateAttributes({name: 'F. Lancer 2'}),
+                obj2.destroy()
             ])
     })
 
