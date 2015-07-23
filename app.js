@@ -41,6 +41,9 @@ sequelize.drop().then(function() {
             Company.create({name: 'HTC'}),
             Company.create({name: 'F. Lancer'}),
             Company.create({name: 'Nokia'})])
+            /* Also, can be created using Bulk:
+            * http://docs.sequelizejs.com/en/1.7.0/docs/instances/
+            * */
     })
     .then(function () {
         return Promise.all([
@@ -55,7 +58,9 @@ sequelize.drop().then(function() {
                 obj1.updateAttributes({name: 'F. Lancer 2'}),
                 obj2.destroy()
             ])
-    })
+    }).then(function () {
+            sequelize.close()
+        })
 
 })
 
